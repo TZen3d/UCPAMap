@@ -31,10 +31,21 @@ var map = new ol.Map({
     })
 });
 
-var layerSwitcher = new ol.control.LayerSwitcher({tipLabel: "Layers"});
-map.addControl(layerSwitcher);
 
-map.getView().fit([-596901.211210, 5151280.205851, 1230430.042233, 6611118.477100], map.getSize());
+    var searchLayer = new SearchLayer({
+      layer: lyr_SitesUCPA_1,
+      colName: 'Site',
+      zoom: 10,
+      collapsed: true,
+      map: map
+    });
+
+    map.addControl(searchLayer);
+    document.getElementsByClassName('search-layer')[0]
+    .getElementsByTagName('button')[0].className +=
+    ' fa fa-binoculars';
+    
+map.getView().fit([-753271.582517, 5050974.116846, 1284340.004062, 6673730.375732], map.getSize());
 
 var NO_POPUP = 0
 var ALL_FIELDS = 1
@@ -349,17 +360,6 @@ map.on('singleclick', function(evt) {
 
 
 
-
-var geocoder = new Geocoder('nominatim', {
-  provider: 'osm',
-  lang: 'en-US',
-  placeholder: 'Search for ...',
-  limit: 5,
-  keepOpen: true
-});
-map.addControl(geocoder);
-
-document.getElementsByClassName('gcd-gl-btn')[0].className += ' fa fa-search';
 
 var attributionComplete = false;
 map.on("rendercomplete", function(evt) {
