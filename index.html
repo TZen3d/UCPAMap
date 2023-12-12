@@ -98,23 +98,31 @@
                 mouseover: highlightFeature,
             });
             var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['webpage'] !== null ? autolinker.link(feature.properties['webpage'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Image'] !== null ? '<img src="images/' + String(feature.properties['Image']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Commune'] !== null ? autolinker.link(feature.properties['Commune'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Type'] !== null ? autolinker.link(feature.properties['Type'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400, minWidth : 295});
+                <tr>\
+                    <td colspan="2">' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
+                </tr>\
+                <tr>\
+                    <td colspan="2">' + (feature.properties['webpage'] !== null ? '<a href="' + feature.properties['webpage'].toLocaleString() + '" onclick="openLinkInSameWindow(this); return false;">Aller sur la page du site</a>' : '') + '</td>\
+                </tr>\
+                <tr>\
+                    <td colspan="2">' + (feature.properties['Image'] !== null ? '<img id="popup-image" src="images/' + String(feature.properties['Image']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
+                </tr>\
+                <tr>\
+                    <td colspan="2">' + (feature.properties['Commune'] !== null ? autolinker.link(feature.properties['Commune'].toLocaleString()) : '') + '</td>\
+                </tr>\
+                <tr>\
+                    <td colspan="2">' + (feature.properties['Type'] !== null ? autolinker.link(feature.properties['Type'].toLocaleString()) : '') + '</td>\
+                </tr>\
+            </table>';
+
+            layer.bindPopup(popupContent, {
+                maxHeight: 400,
+                minWidth : 295
+            });
+
+            function openLinkInSameWindow(link) {
+                window.open(link.href, '_self');
+            }
         }
 
         function style_SitesUCPA_2_0(feature) {
@@ -174,7 +182,7 @@
         bounds_group.addLayer(layer_SitesUCPA_2);
         map.addLayer(layer_SitesUCPA_2);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'SitesUCPA<br /><table><tr><td style="text-align: center;"><img src="legend/SitesUCPA_2_Activité0.png" /></td><td>Activité</td></tr><tr><td style="text-align: center;"><img src="legend/SitesUCPA_2_HébergementMontagne1.png" /></td><td>Hébergement Montagne</td></tr></table>': layer_SitesUCPA_2,"Google Maps": layer_GoogleMaps_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
+        L.control.layers(baseMaps,{'SitesUCPA<br /><table><tr><td style="text-align: center;"><img src="legend/SitesUCPA_2_Activité0.png" /></td><td>Activité Montagne</td></tr><tr><td style="text-align: center;"><img src="legend/SitesUCPA_2_HébergementMontagne1.png" /></td><td>Hébergement Montagne</td></tr></table>': layer_SitesUCPA_2,"Google Maps": layer_GoogleMaps_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
         map.on("zoomend", function(){
 
                 if (map.hasLayer(layer_SitesUCPA_2)) {
