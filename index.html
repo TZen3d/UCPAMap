@@ -98,31 +98,23 @@
                 mouseover: highlightFeature,
             });
             var popupContent = '<table>\
-                <tr>\
-                    <td colspan="2">' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
-                </tr>\
-                <tr>\
-                    <td colspan="2">' + (feature.properties['webpage'] !== null ? '<a href="' + feature.properties['webpage'].toLocaleString() + '" onclick="openLinkInSameWindow(this); return false;">Aller sur la page du site</a>' : '') + '</td>\
-                </tr>\
-                <tr>\
-                    <td colspan="2">' + (feature.properties['Image'] !== null ? '<img id="popup-image" src="images/' + String(feature.properties['Image']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
-                </tr>\
-                <tr>\
-                    <td colspan="2">' + (feature.properties['Commune'] !== null ? autolinker.link(feature.properties['Commune'].toLocaleString()) : '') + '</td>\
-                </tr>\
-                <tr>\
-                    <td colspan="2">' + (feature.properties['Type'] !== null ? autolinker.link(feature.properties['Type'].toLocaleString()) : '') + '</td>\
-                </tr>\
-            </table>';
-
-            layer.bindPopup(popupContent, {
-                maxHeight: 400,
-                minWidth : 295
-            });
-
-            function openLinkInSameWindow(link) {
-                window.open(link.href, '_self');
-            }
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Site'] !== null ? autolinker.link(feature.properties['Site'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['webpage'] !== null ? autolinker.link(feature.properties['webpage'].toLocaleString(), { target: '_self' }) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Image'] !== null ? '<img src="images/' + String(feature.properties['Image']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Commune'] !== null ? autolinker.link(feature.properties['Commune'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Type'] !== null ? autolinker.link(feature.properties['Type'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400, minWidth : 295});
         }
 
         function style_SitesUCPA_2_0(feature) {
