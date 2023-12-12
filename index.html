@@ -114,7 +114,7 @@
                         <td colspan="2">' + (feature.properties['Type'] !== null ? autolinker.link(feature.properties['Type'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
+            layer.bindPopup(popupContent, {maxHeight: 400, minWidth : 295});
         }
 
         function style_SitesUCPA_2_0(feature) {
